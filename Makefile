@@ -17,7 +17,7 @@ OUTPUT_DIR = bin
 
 # 默认目标
 .PHONY: build
-build: $(foreach platform,$(PLATFORMS),$(OUTPUT_DIR)/$(APP1)-$(VERSION).$(platform))
+build: $(foreach platform,$(PLATFORMS),$(OUTPUT_DIR)/$(APP_NAME)-$(VERSION).$(platform))
 
 $(OUTPUT_DIR)/$(APP_NAME)-$(VERSION).%: GOOS = $(word 1, $(subst -, ,$*))
 $(OUTPUT_DIR)/$(APP_NAME)-$(VERSION).%: GOARCH = $(word 2, $(subst -, ,$*))
