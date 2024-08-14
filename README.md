@@ -40,7 +40,7 @@ or
 scrape_configs:
   - job_name: "clamd_exporter"
     static_configs:
-      - targets: ["192.168.1.10:8181"]
+      - targets: ["127.0.0.1:8181"]
 ```
 
 # Grafana Dashboard
