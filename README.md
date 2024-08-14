@@ -31,7 +31,7 @@ scrape_configs:
 
 # Grafana Dashboard
 
-[![Dashboard](assets/dashboard.png)]
+![Dashboard](assets/dashboard.png)
 
 Grafana Dashboard: https://github.com/hq0101/clamd_exporter/blob/main/assets/ClamdDashboard.json
 
