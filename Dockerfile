@@ -1,10 +1,15 @@
-FROM golang:1.20 AS builder
+FROM golang:1.20 AS build-stage
 
 WORKDIR /app
 
 ENV GO111MODULE=on
 ENV GOPROXY=https://goproxy.cn,direct
 
+COPY go.mod go.sum ./
+RUN go mod download
+
+FROM build-stage AS builder
+WORKDIR /app
 COPY . .
 
 RUN GOOS=linux GOARCH=amd64 go build -o clamd_exporter ./cmd/main.go
