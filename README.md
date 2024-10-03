@@ -7,7 +7,7 @@
 
 # 概述
 
-clamd_exporter是一个轻量级的监控工具，它能够收集ClamAV的clamd服务运行状态和性能指标，并将这些指标以Prometheus兼容的格式暴露出来。这使得在复杂的系统监控环境中，能够轻松地对ClamAV的防病毒服务进行监控和警报设置。
+clamd_exporter是一个轻量级的监控工具，它能够收集ClamAV的clamd服务运行状态和性能指标，并将这些指标以Prometheus兼容的格式暴露出来。能够轻松地对ClamAV的防病毒服务进行监控和警报设置。
 
 
 # 使用

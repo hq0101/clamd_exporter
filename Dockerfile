@@ -2,6 +2,9 @@ FROM golang:1.20 AS builder
 
 WORKDIR /app
 
+ENV GO111MODULE=on
+ENV GOPROXY=https://goproxy.cn,direct
+
 COPY . .
 
 RUN GOOS=linux GOARCH=amd64 go build -o clamd_exporter ./cmd/main.go
@@ -12,7 +15,7 @@ WORKDIR /app
 
 COPY --from=builder /app/clamd_exporter .
 
-EXPOSE 8080
+EXPOSE 8181
 
 ENTRYPOINT ["./clamd_exporter"]
 CMD ["-l", ":8181","-a", "192.168.127.131:3310", "-n", "tcp"]
