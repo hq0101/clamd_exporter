@@ -34,13 +34,52 @@ or
 
 # Prometheus配置
 
+```bash
+cat <<EOF > clamd-deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: clamd-exporter
+spec:
+  selector:
+    matchLabels:
+      app: clamd-exporter
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: clamd-exporter
+    spec:
+      containers:
+        - name: exporter
+          image: clamd-exporter:latest
+          imagePullPolicy: IfNotPresent
+          args: ["-l", ":8181","-a", "192.168.127.131:3310", "-n", "tcp"]
+          ports:
+            - containerPort: 8181
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: clamd-exporter
+spec:
+  type: NodePort
+  ports:
+    - port: 8181
+      targetPort: 8181
+  selector:
+    app: clamd-exporter
+EOF
+```
+
 在Prometheus的配置文件中，添加一个新的抓取任务来收集clamd_exporter暴露的指标：
 
 ```yaml
 scrape_configs:
   - job_name: "clamd_exporter"
     static_configs:
-      - targets: ["127.0.0.1:8181"]
+      - targets: ["clamd-exporter:8181"]
 ```
 
 # Grafana Dashboard
